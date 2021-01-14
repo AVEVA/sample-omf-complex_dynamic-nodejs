@@ -29,7 +29,7 @@ This sample has an indirect dependency on lodash 4.17.15 because of request-prom
 
 ## Sample Details
 
-See [ReadMe](../)
+See [ReadMe](https://github.com/osisoft/OSI-Samples-OMF/blob/master/docs/COMPLEX_DYNAMIC_README.md)
 
 ### Configuration
 
@@ -122,5 +122,5 @@ An OMF endpoint must be properly set up and configured.
 
 ---
 
-For the OMF landing page [ReadMe](../../../)  
-For the OSIsoft Samples landing page [ReadMe](https://github.com/osisoft/OSI-Samples)
+For the main OMF samples page on master [ReadMe](https://github.com/osisoft/OSI-Samples-OMF)  
+For the main OSIsoft samples page on master [ReadMe](https://github.com/osisoft/OSI-Samples)

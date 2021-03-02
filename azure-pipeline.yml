@@ -112,7 +112,7 @@ jobs:
           versionSpec: '10.x'
         displayName: 'Specify Node version'
 
-      - script: ci
+      - script: npm ci
         displayName: 'Install dependencies'
 
       - script: npm test

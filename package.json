@@ -13,7 +13,7 @@
     "request-promise": "4.2.6"
   },
   "devDependencies": {
-    "jasmine-reporters": "2.3.2",
-    "jasmine": "3.6.4"
+    "jasmine": "^3.7.0",
+    "jasmine-reporters": "^2.4.0"
   }
 }

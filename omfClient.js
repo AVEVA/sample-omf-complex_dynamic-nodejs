@@ -1,6 +1,8 @@
-var restCall = require("request-promise");
+var axios = require('axios');
+var https = require('https');
+var zlib = require('zlib');
 
-module.exports = {
+var axiosNoSSL = (module.exports = {
   OMFClient: function (omfURL, client, basicId = null, basicPassword = null) {
     if (client) {
       this.tokenExpires = client.tokenExpires;
@@ -10,86 +12,122 @@ module.exports = {
 
     // create a type
     this.createType = function (omfType) {
-      return restCall({
+      return axios({
         url: omfURL,
-        method: "POST",
-        headers: this.getHeadersType("type"),
-        body: JSON.stringify(omfType).toString(),
-        rejectUnauthorized: global.config.VERIFY_SSL,
+        method: 'POST',
+        headers: this.getHeadersType('type'),
+        data: JSON.stringify(omfType).toString(),
+        transformRequest: [(data, headers) => this.gzipCompress(data, headers)],
+        httpsAgent: new https.Agent({
+          keepAlive: true,
+          rejectUnauthorized: global.config.VERIFY_SSL,
+        }),
       });
     };
 
     // create a container
     this.createContainer = function (omfContainer) {
-      return restCall({
+      return axios({
         url: omfURL,
-        method: "POST",
-        headers: this.getHeadersType("container"),
-        body: JSON.stringify(omfContainer).toString(),
-        rejectUnauthorized: global.config.VERIFY_SSL,
+        method: 'POST',
+        headers: this.getHeadersType('container'),
+        data: JSON.stringify(omfContainer).toString(),
+        transformRequest: [(data, headers) => this.gzipCompress(data, headers)],
+        httpsAgent: new https.Agent({
+          keepAlive: true,
+          rejectUnauthorized: global.config.VERIFY_SSL,
+        }),
       });
     };
 
     // create data
     this.createData = function (omfContainer) {
-      return restCall({
+      return axios({
         url: omfURL,
-        method: "POST",
-        headers: this.getHeadersType("data"),
-        body: JSON.stringify(omfContainer).toString(),
-        rejectUnauthorized: global.config.VERIFY_SSL,
+        method: 'POST',
+        headers: this.getHeadersType('data'),
+        data: JSON.stringify(omfContainer).toString(),
+        transformRequest: [(data, headers) => this.gzipCompress(data, headers)],
+        httpsAgent: new https.Agent({
+          keepAlive: true,
+          rejectUnauthorized: global.config.VERIFY_SSL,
+        }),
       });
     };
 
     this.deleteType = function (omfType) {
-      return restCall({
+      return axios({
         url: omfURL,
-        method: "POST",
-        headers: this.getHeadersType("type", "delete"),
-        body: JSON.stringify(omfType).toString(),
-        rejectUnauthorized: global.config.VERIFY_SSL,
+        method: 'POST',
+        headers: this.getHeadersType('type', 'delete'),
+        data: JSON.stringify(omfType).toString(),
+        transformRequest: [(data, headers) => this.gzipCompress(data, headers)],
+        httpsAgent: new https.Agent({
+          keepAlive: true,
+          rejectUnauthorized: global.config.VERIFY_SSL,
+        }),
       });
     };
 
     // create a container
     this.deleteContainer = function (omfContainer) {
-      return restCall({
+      return axios({
         url: omfURL,
-        method: "POST",
-        headers: this.getHeadersType("container", "delete"),
-        body: JSON.stringify(omfContainer).toString(),
-        rejectUnauthorized: global.config.VERIFY_SSL,
+        method: 'POST',
+        headers: this.getHeadersType('container', 'delete'),
+        data: JSON.stringify(omfContainer).toString(),
+        transformRequest: [(data, headers) => this.gzipCompress(data, headers)],
+        httpsAgent: new https.Agent({
+          keepAlive: true,
+          rejectUnauthorized: global.config.VERIFY_SSL,
+        }),
       });
     };
 
-    this.getHeadersType = function (message_type, action = "create") {
+    // gzip compresses a body
+    this.gzipCompress = function (data, headers) {
+      if (
+        'Content-Encoding' in headers &&
+        headers['Content-Encoding'].toLowerCase() === 'gzip'
+      )
+        console.log(zlib.gzipSync(data)) //REMOVE
+        return zlib.gzipSync(data);
+      return data;
+    };
+
+    // returns headers
+    this.getHeadersType = function (message_type, action = 'create') {
+      var gzipHeaders = {};
+      if (global.config.compression) {
+        gzipHeaders = { 'Content-Encoding': 'gzip' };
+      }
       if (basicId) {
-        return {
+        return Object.assign({
           messagetype: message_type,
-          omfversion: "1.1",
+          omfversion: '1.1',
           action: action,
-          messageformat: "json",
+          messageformat: 'json',
           Authorization:
-            "Basic " +
-            new Buffer(basicId + ":" + basicPassword).toString("base64"),
-          "x-requested-with": "xmlhttprequest",
-        };
+            'Basic ' +
+            new Buffer(basicId + ':' + basicPassword).toString('base64'),
+          'x-requested-with': 'xmlhttprequest',
+        }, gzipHeaders);
       } else if (client) {
-        return {
-          Authorization: "bearer " + client.token,
+        return Object.assign({
+          Authorization: 'bearer ' + client.token,
           messagetype: message_type,
-          omfversion: "1.1",
+          omfversion: '1.1',
           action: action,
-          messageformat: "json",
-        };
+          messageformat: 'json',
+        }, gzipHeaders);
       } else {
-        return {
+        return Object.assign({
           messagetype: message_type,
-          omfversion: "1.1",
+          omfversion: '1.1',
           action: action,
-          messageformat: "json",
-        };
+          messageformat: 'json',
+        }, gzipHeaders);
       }
     };
   },
-};
+});

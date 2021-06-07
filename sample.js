@@ -49,7 +49,7 @@ const rl = readline.createInterface({
 });
 
 var refreshToken = function (res, authClient) {
-  var obj = JSON.parse(res);
+  var obj = res.data;
   authClient.token = obj.access_token;
   authClient.tokenExpires = obj.expires_on;
 };

@@ -1,4 +1,5 @@
-var restCall = require("request-promise");
+var axios = require("axios");
+const { URLSearchParams } = require('url');
 
 var logError = function (err) {
   success = false;
@@ -18,31 +19,31 @@ module.exports = {
 
     // returns an access token
     this.getToken = function (clientId, clientSecret, resource) {
-      return restCall({
-        url: resource + "/identity/.well-known/openid-configuration",
-        method: "GET",
+      return axios({
+        url: resource + '/identity/.well-known/openid-configuration',
+        method: 'GET',
         headers: {
-          Accept: "application/json",
+          Accept: 'application/json',
+          'Accept-Encoding': 'gzip',
         },
-        gzip: true,
       })
         .then(function (res) {
-          var obj = JSON.parse(res);
+          var obj = res.data;
           authority = obj.token_endpoint;
 
-          return restCall({
-            url: authority,
-            method: "POST",
+          var body = new URLSearchParams({
+            grant_type: 'client_credentials',
+            client_id: clientId,
+            client_secret: clientSecret,
+          });
+
+          console.log(body.toString());
+
+          return axios.post(authority, body.toString(), {
             headers: {
-              "Content-Type": "application/x-www-form-urlencoded",
+              'Content-Type': 'application/x-www-form-urlencoded',
+              'Accept-Encoding': 'gzip',
             },
-            form: {
-              grant_type: "client_credentials",
-              client_id: clientId,
-              client_secret: clientSecret,
-              resource: resource,
-            },
-            gzip: true,
           });
         })
         .catch(function (err) {

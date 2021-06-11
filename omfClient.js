@@ -132,6 +132,7 @@ var axiosNoSSL = (module.exports = {
             omfversion: '1.1',
             action: action,
             messageformat: 'json',
+            'Content-Type': 'application-json',
           },
           gzipHeaders
         );

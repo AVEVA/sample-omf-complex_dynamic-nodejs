@@ -10,11 +10,11 @@ describe("Complex_Dynamic NodeJS Sample", function () {
         if (global.config.OCS) {
           console.log("need to check data here since it is async");
 
-          var restCall = require("request-promise");
+          var axios = require("axios");
           url =
             global.config.omfURL.split("/omf")[0] +
             "/streams/Tank1Measurements/data/last";
-          return restCall({
+          return axios({
             url: url,
             method: "Get",
             headers: { Authorization: "bearer " + global.authClient.token },

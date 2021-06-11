@@ -4,7 +4,7 @@
 module.exports = {
   OCS: true,
   PI: false,
-  eds: false,
+  EDS: false,
   omfURL:
     "",
   id: "",

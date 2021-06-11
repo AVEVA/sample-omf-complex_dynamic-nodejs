@@ -98,34 +98,43 @@ var axiosNoSSL = (module.exports = {
     this.getHeadersType = function (message_type, action = 'create') {
       var gzipHeaders = {};
       if (global.config.compression) {
-        gzipHeaders = { 'Compression': 'gzip' };
+        gzipHeaders = { Compression: 'gzip' };
       }
-      if (basicId) {
-        return Object.assign({
-          messagetype: message_type,
-          omfversion: '1.1',
-          action: action,
-          messageformat: 'json',
-          Authorization:
-            'Basic ' +
-            new Buffer(basicId + ':' + basicPassword).toString('base64'),
-          'x-requested-with': 'xmlhttprequest',
-        }, gzipHeaders);
-      } else if (client) {
-        return Object.assign({
-          Authorization: 'bearer ' + client.token,
-          messagetype: message_type,
-          omfversion: '1.1',
-          action: action,
-          messageformat: 'json',
-        }, gzipHeaders);
+      if (global.config.PI) {
+        return Object.assign(
+          {
+            messagetype: message_type,
+            omfversion: '1.1',
+            action: action,
+            messageformat: 'json',
+            Authorization:
+              'Basic ' +
+              new Buffer(basicId + ':' + basicPassword).toString('base64'),
+            'x-requested-with': 'xmlhttprequest',
+          },
+          gzipHeaders
+        );
+      } else if (global.config.OCS) {
+        return Object.assign(
+          {
+            Authorization: 'bearer ' + client.token,
+            messagetype: message_type,
+            omfversion: '1.1',
+            action: action,
+            messageformat: 'json',
+          },
+          gzipHeaders
+        );
       } else {
-        return Object.assign({
-          messagetype: message_type,
-          omfversion: '1.1',
-          action: action,
-          messageformat: 'json',
-        }, gzipHeaders);
+        return Object.assign(
+          {
+            messagetype: message_type,
+            omfversion: '1.1',
+            action: action,
+            messageformat: 'json',
+          },
+          gzipHeaders
+        );
       }
     };
   },

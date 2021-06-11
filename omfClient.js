@@ -99,7 +99,7 @@ var axiosNoSSL = (module.exports = {
     this.getHeadersType = function (message_type, action = 'create') {
       var gzipHeaders = {};
       if (global.config.compression) {
-        gzipHeaders = { 'Content-Encoding': 'gzip' };
+        gzipHeaders = { 'Compression': 'gzip' };
       }
       if (basicId) {
         return Object.assign({

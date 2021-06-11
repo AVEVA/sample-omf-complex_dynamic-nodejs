@@ -87,10 +87,9 @@ var axiosNoSSL = (module.exports = {
     // gzip compresses a body
     this.gzipCompress = function (data, headers) {
       if (
-        'Content-Encoding' in headers &&
-        headers['Content-Encoding'].toLowerCase() === 'gzip'
+        'Compression' in headers &&
+        headers['Compression'].toLowerCase() === 'gzip'
       )
-        console.log(zlib.gzipSync(data)) //REMOVE
         return zlib.gzipSync(data);
       return data;
     };

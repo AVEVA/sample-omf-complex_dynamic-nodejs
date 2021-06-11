@@ -10,7 +10,7 @@ module.exports = {
   id: "",
   password: "",
   omfversion: "1.1",
-  compression: "",
+  compression: true,
   WEB_REQUEST_TIMEOUT_SECONDS: "",
-  VERIFY_SSL: ""
+  VERIFY_SSL: true
 };

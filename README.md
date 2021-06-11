@@ -14,18 +14,13 @@ This sample uses OSIsoft Message Format to send data to OSIsoft Cloud Services, 
 
 ```json
   "dependencies": {
-    "request": "2.88.2",
-    "request-promise": "4.2.5"
+    "axios": "^0.21.1"
   },
   "devDependencies": {
     "jasmine-reporters": "2.3.2",
     "jasmine": "3.5.0"
   }
 ```
-
-## Known Security Issues
-
-This sample has an indirect dependency on lodash 4.17.15 because of request-promise 2.88.2. In this version of lodash there is an outstanding security [issue](https://hackerone.com/reports/670779). Please note that using this sample is potentially unsafe because of this issue. Please review the issue before using this.
 
 ## Sample Details
 
@@ -48,9 +43,9 @@ module.exports = {
   id: '{id}',
   password: '{password}',
   omfversion: '1.1',
-  compression: '',
+  compression: true,
   WEB_REQUEST_TIMEOUT_SECONDS: '',
-  VERIFY_SSL: '',
+  VERIFY_SSL: true,
 };
 ```
 

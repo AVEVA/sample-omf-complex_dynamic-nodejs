@@ -1,7 +1,12 @@
 {
   "name": "complex_dynamic_nodejs",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "A sample showing how to send complex dynamic OMF types, containers and data",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/osisoft/sample-omf-complex_dynamic-nodejs.git"
+  },
   "main": "Sample.js",
   "scripts": {
     "test": "jasmine"

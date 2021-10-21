@@ -1,5 +1,11 @@
 # Version History
 
+## 1.1.0 / 2021-10-21
+
+- Updated pipelines to use Azure Key Vault for secrets
+- Replaced deprecated request and request-promise dependancies with axios
+- Changed config.js to appsettings.json
+
 ## 1.0.11 / 2021-09-07
 
 - Updated dependencies

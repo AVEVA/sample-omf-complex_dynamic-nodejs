@@ -15,16 +15,6 @@ module.exports = {
       this.token = client.token;
     }
 
-    // create a custom http agent with SSL verification disabled if configured
-    if (!verifySSL) {
-      const insecureAgent = axios.create({
-        httpsAgent: new https.Agent({
-          rejectUnauthorized: verifySSL,
-        }),
-      });
-      axios.default.httpsAgent = insecureAgent;
-    }
-
     // create a type
     this.createType = function (omfType) {
       return axios({
@@ -32,6 +22,7 @@ module.exports = {
         method: 'POST',
         headers: this.getHeadersType('type'),
         data: JSON.stringify(omfType).toString(),
+        httpsAgent: new https.Agent({ rejectUnauthorized: verifySSL }),
       });
     };
 
@@ -42,6 +33,7 @@ module.exports = {
         method: 'POST',
         headers: this.getHeadersType('container'),
         data: JSON.stringify(omfContainer).toString(),
+        httpsAgent: new https.Agent({ rejectUnauthorized: verifySSL }),
       });
     };
 
@@ -52,6 +44,7 @@ module.exports = {
         method: 'POST',
         headers: this.getHeadersType('data'),
         data: JSON.stringify(omfContainer).toString(),
+        httpsAgent: new https.Agent({ rejectUnauthorized: verifySSL }),
       });
     };
 
@@ -61,6 +54,7 @@ module.exports = {
         method: 'POST',
         headers: this.getHeadersType('type', 'delete'),
         data: JSON.stringify(omfType).toString(),
+        httpsAgent: new https.Agent({ rejectUnauthorized: verifySSL }),
       });
     };
 
@@ -71,6 +65,7 @@ module.exports = {
         method: 'POST',
         headers: this.getHeadersType('container', 'delete'),
         data: JSON.stringify(omfContainer).toString(),
+        httpsAgent: new https.Agent({ rejectUnauthorized: verifySSL }),
       });
     };
 

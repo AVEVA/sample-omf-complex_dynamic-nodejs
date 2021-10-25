@@ -162,5 +162,6 @@ The format of the configuration for a PI endpoint is shown below along with desc
 
 ---
 
+For the main OMF Complex Dynamic samples page [ReadMe](https://github.com/osisoft/OSI-Samples-OMF/blob/main/docs/COMPLEX_DYNAMIC.md)  
 For the main OMF samples page [ReadMe](https://github.com/osisoft/OSI-Samples-OMF)  
 For the main OSIsoft samples page [ReadMe](https://github.com/osisoft/OSI-Samples)

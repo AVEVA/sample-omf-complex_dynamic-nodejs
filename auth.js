@@ -1,4 +1,5 @@
-var restCall = require("request-promise");
+var axios = require('axios');
+const { URLSearchParams } = require('url');
 
 var logError = function (err) {
   success = false;
@@ -6,44 +7,48 @@ var logError = function (err) {
   console.trace();
   console.log(err.message);
   console.log(err.stack);
-  console.log(err.options.headers["Operation-Id"]);
+  console.log(err.options.headers['Operation-Id']);
   throw err;
 };
 
 module.exports = {
   AuthClient: function (url) {
     this.url = url;
-    this.token = "";
-    this.tokenExpires = "";
+    this.token = '';
+    this.tokenExpires = '';
 
     // returns an access token
     this.getToken = function (clientId, clientSecret, resource) {
-      return restCall({
-        url: resource + "/identity/.well-known/openid-configuration",
-        method: "GET",
+      return axios({
+        url: resource + '/identity/.well-known/openid-configuration',
+        method: 'GET',
         headers: {
-          Accept: "application/json",
+          Accept: 'application/json',
+          'Accept-Encoding': 'gzip',
         },
-        gzip: true,
       })
         .then(function (res) {
-          var obj = JSON.parse(res);
-          authority = obj.token_endpoint;
-
-          return restCall({
-            url: authority,
-            method: "POST",
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded",
-            },
-            form: {
-              grant_type: "client_credentials",
+          var obj = res.data;
+          authority = new URL(obj.token_endpoint);
+          resUrl = new URL(resource);
+          if (
+            authority.protocol === resUrl.protocol &&
+            authority.hostname === resUrl.hostname
+          ) {
+            var body = new URLSearchParams({
+              grant_type: 'client_credentials',
               client_id: clientId,
               client_secret: clientSecret,
-              resource: resource,
-            },
-            gzip: true,
-          });
+            });
+
+            return axios.post(authority.href, body.toString(), {
+              headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+              },
+            });
+          } else {
+            logError(`Encountered error parsing authority: ${authority.href}`);
+          }
         })
         .catch(function (err) {
           logError(err);

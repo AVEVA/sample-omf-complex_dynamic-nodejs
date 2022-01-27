@@ -8,7 +8,7 @@ describe('Complex_Dynamic NodeJS Sample', function () {
     sample = Sample.app(['1,2', 'n'])
       .then(() => {
         global.appsettings.Endpoints.forEach((endpoint) => {
-          if (endpoint.EndpointType == global.endpointTypes.OCS) {
+          if (endpoint.EndpointType == global.endpointTypes.ADH) {
             console.log('need to check data here since it is async');
 
             var axios = require('axios');

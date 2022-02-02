@@ -156,7 +156,7 @@ jobs:
           searchFolder: '$(Build.SourcesDirectory)/TestResults'
           testRunTitle: '$(Agent.JobName) on $(Agent.OS)'
         displayName: 'Publish test results'
-        condition: always()'
+        condition: always()
 
   - template: '/miscellaneous/build_templates/code-analysis.yml@templates'
 

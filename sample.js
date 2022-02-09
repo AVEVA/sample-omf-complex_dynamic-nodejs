@@ -6,7 +6,7 @@ var omfObj = require('./omfClient.js');
 var success = true;
 var errorCap = {};
 const endpointTypes = {
-  OCS: 'OCS',
+  ADH: 'ADH',
   EDS: 'EDS',
   PI: 'PI',
 };
@@ -84,7 +84,7 @@ var app = function (entries) {
   // Generate omf clients
   appsettings.Endpoints.forEach((endpoint) => {
     // Create base urls
-    if (endpoint.EndpointType == endpointTypes.OCS) {
+    if (endpoint.EndpointType == endpointTypes.ADH) {
       endpoint.BaseEndpoint =
         endpoint.Resource +
         '/api/' +
@@ -135,7 +135,7 @@ var app = function (entries) {
   var oneTimeCreates = function (endpoint) {
     var getClientToken;
 
-    if (endpoint.EndpointType == endpointTypes.OCS) {
+    if (endpoint.EndpointType == endpointTypes.ADH) {
       getClientToken = endpoint.authClient
         .getToken(endpoint.ClientId, endpoint.ClientSecret, endpoint.Resource)
         .then(function (res) {

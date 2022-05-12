@@ -76,8 +76,6 @@ jobs:
         displayName: 'Publish test results'
         condition: always()
 
-      - template: '/miscellaneous/build_templates/analysis.yml@templates'
-
   - job: Tests_OnPrem
     pool:
       name: 00-OSIManaged-Containers

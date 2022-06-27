@@ -1,6 +1,6 @@
 {
   "name": "complex_dynamic_nodejs",
-  "version": "1.1.8",
+  "version": "1.1.9",
   "description": "A sample showing how to send complex dynamic OMF types, containers and data",
   "private": true,
   "repository": {
@@ -17,7 +17,7 @@
     "axios": "^0.27.2"
   },
   "devDependencies": {
-    "jasmine": "^4.1.0",
+    "jasmine": "^4.2.1",
     "jasmine-reporters": "^2.5.0"
   }
 }

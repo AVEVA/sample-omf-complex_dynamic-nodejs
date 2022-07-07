@@ -121,6 +121,7 @@ jobs:
   - job: Tests_EDS
     pool:
       name: 00-OSIManaged-Build
+      demands: SKU -equals VSEnterprise2022
     variables:
       - name: Endpoints.0.Selected
         value: false

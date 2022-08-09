@@ -33,12 +33,29 @@ variables:
   - name: analysisProject
     value: OMF_DC_NodeJS
 
+parameters:
+  - name: poolADH
+    default: 00-OSIManaged-Containers
+  - name: containerDemandsADH
+    type: object
+    default: ['Agent.OS -equals Windows_NT']
+  - name: poolPI
+    default: 00-OSIManaged-Containers
+  - name: containerDemandsPI
+    type: object
+    default: ['Agent.OS -equals Windows_NT']
+  - name: poolEDS
+    default: 00-OSIManaged-Build
+  - name: containerDemandsEDS
+    type: object
+    default: ['SKU -equals VSEnterprise2022']
+
 jobs:
   - job: Tests_ADH
     condition: ne(variables['Build.Reason'], 'Schedule')
     pool:
-      name: 00-OSIManaged-Containers
-      demands: Agent.OS -equals Windows_NT
+      name: ${{ parameters.poolADH }}
+      demands: ${{ parameters.containerDemandsADH }}
     variables:
       - name: Endpoints.0.Selected
         value: true
@@ -77,11 +94,11 @@ jobs:
         displayName: 'Publish test results'
         condition: always()
 
-  - job: Tests_OnPrem
+  - job: Tests_PI
     condition: ne(variables['Build.Reason'], 'Schedule')
     pool:
-      name: 00-OSIManaged-Containers
-      demands: Agent.OS -equals Windows_NT
+      name: ${{ parameters.poolPI }}
+      demands: ${{ parameters.containerDemandsPI }}
     variables:
       - name: Endpoints.0.Selected
         value: false
@@ -123,8 +140,8 @@ jobs:
   - job: Tests_EDS
     condition: ne(variables['Build.Reason'], 'Schedule')
     pool:
-      name: 00-OSIManaged-Build
-      demands: SKU -equals VSEnterprise2022
+      name: ${{ parameters.poolEDS }}
+      demands: ${{ parameters.containerDemandsEDS }}
     variables:
       - name: Endpoints.0.Selected
         value: false

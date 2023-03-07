@@ -1,5 +1,9 @@
 # Version History
 
+## 1.1.12 / 2023-03-07
+
+- Move code analysis to new pipeline
+
 ## 1.1.11 / 2022-08-17
 
 - Automate dependabot approval and automerge

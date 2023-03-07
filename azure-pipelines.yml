@@ -40,7 +40,6 @@ parameters:
 
 jobs:
   - job: Tests_ADH
-    condition: ne(variables['Build.Reason'], 'Schedule')
     pool:
       name: ${{ parameters.poolADH }}
       demands: ${{ parameters.containerDemandsADH }}
@@ -83,7 +82,6 @@ jobs:
         condition: always()
 
   - job: Tests_PI
-    condition: ne(variables['Build.Reason'], 'Schedule')
     pool:
       name: ${{ parameters.poolPI }}
       demands: ${{ parameters.containerDemandsPI }}
@@ -126,7 +124,6 @@ jobs:
         condition: always()
         
   - job: Tests_EDS
-    condition: ne(variables['Build.Reason'], 'Schedule')
     pool:
       name: ${{ parameters.poolEDS }}
       demands: ${{ parameters.containerDemandsEDS }}

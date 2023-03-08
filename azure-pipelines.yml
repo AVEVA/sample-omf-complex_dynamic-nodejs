@@ -81,7 +81,7 @@ jobs:
         displayName: 'Publish test results'
         condition: always()
 
-  - job: Tests_PI
+  - job: Tests_OnPrem
     pool:
       name: ${{ parameters.poolPI }}
       demands: ${{ parameters.containerDemandsPI }}

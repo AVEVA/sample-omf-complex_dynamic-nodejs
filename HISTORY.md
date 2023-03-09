@@ -1,9 +1,5 @@
 # Version History
 
-## 1.1.13 / 2023-03-07
-
-- Move code analysis to new pipeline
-
 ## 1.1.12 / 2023-03-07
 
 - Move code analysis to new pipeline

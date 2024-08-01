@@ -2,13 +2,13 @@
 
 **Version:** 1.1.13
 
-| ADH Test Status                                                                                                                                                                                                                                                                                                                                                                      | EDS Test Status                                                                                                                                                                                                                                                                                                                                                                      | PI Test Status                                                                                                                                                                                                                                                                                                                                                                          |
+| Cds Test Status                                                                                                                                                                                                                                                                                                                                                                      | EDS Test Status                                                                                                                                                                                                                                                                                                                                                                      | PI Test Status                                                                                                                                                                                                                                                                                                                                                                          |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [![Build Status](https://dev.azure.com/osieng/engineering/_apis/build/status/product-readiness/OMF/aveva.sample-omf-complex_dynamic-nodejs?branchName=main&jobName=Tests_ADH)](https://dev.azure.com/osieng/engineering/_build/latest?definitionId=2639&branchName=main) | [![Build Status](https://dev.azure.com/osieng/engineering/_apis/build/status/product-readiness/OMF/aveva.sample-omf-complex_dynamic-nodejs?branchName=main&jobName=Tests_EDS)](https://dev.azure.com/osieng/engineering/_build/latest?definitionId=2639&branchName=main) | [![Build Status](https://dev.azure.com/osieng/engineering/_apis/build/status/product-readiness/OMF/aveva.sample-omf-complex_dynamic-nodejs?branchName=main&jobName=Tests_OnPrem)](https://dev.azure.com/osieng/engineering/_build/latest?definitionId=2639&branchName=main) |
+| [![Build Status](https://dev.azure.com/AVEVA-VSTS/Cloud%20Platform/_apis/build/status%2Fproduct-readiness%2FOMF%2FAVEVA.sample-omf-complex_dynamic-nodejs?branchName=main&jobName=Tests_ADH)](https://dev.azure.com/AVEVA-VSTS/Cloud%20Platform/_build/latest?definitionId=16162&branchName=main) | [![Build Status](https://dev.azure.com/AVEVA-VSTS/Cloud%20Platform/_apis/build/status%2Fproduct-readiness%2FOMF%2FAVEVA.sample-omf-complex_dynamic-nodejs?branchName=main&jobName=Tests_EDS)](https://dev.azure.com/AVEVA-VSTS/Cloud%20Platform/_build/latest?definitionId=16162&branchName=main) | [![Build Status](https://dev.azure.com/AVEVA-VSTS/Cloud%20Platform/_apis/build/status%2Fproduct-readiness%2FOMF%2FAVEVA.sample-omf-complex_dynamic-nodejs?branchName=main&jobName=Tests_OnPrem)](https://dev.azure.com/AVEVA-VSTS/Cloud%20Platform/_build/latest?definitionId=16162&branchName=main) |
 
 ---
 
-This sample uses AVEVA Message Format to send data to AVEVA Data Hub, Edge Data Store, or PI Web API.
+This sample uses AVEVA Message Format to send data to CONNECT data services, Edge Data Store, or PI Web API.
 
 ## Requirements
 
@@ -70,13 +70,13 @@ See [ReadMe](https://github.com/osisoft/OSI-Samples-OMF/blob/main/docs/COMPLEX_D
 
 The sample is configured using the file [appsettings.placeholder.json](appsettings.placeholder.json). Before editing, rename this file to `appsettings.json`. This repository's `.gitignore` rules should prevent the file from ever being checked in to any fork or branch, to ensure credentials are not compromised.
 
-The application can be configured to send to any number of endpoints specified in the endpoints array within appsettings.json. In addition, there are three types of endpoints: [ADH](#adh-endpoint-configuration), [EDS](#eds-endpoint-configuration), and [PI](#pi-endpoint-configuration). Each of the 3 types of enpoints are configured differently and their configurations are explained in the sections below.
+The application can be configured to send to any number of endpoints specified in the endpoints array within appsettings.json. In addition, there are three types of endpoints: [Cds](#adh-endpoint-configuration), [EDS](#eds-endpoint-configuration), and [PI](#pi-endpoint-configuration). Each of the 3 types of enpoints are configured differently and their configurations are explained in the sections below.
 
-### ADH Endpoint Configuration
+### Cds Endpoint Configuration
 
 An OMF ingress client must be configured. On our [AVEVA Learning](https://www.youtube.com/channel/UC333r4jIeHaY-rGgMjON54g) Channel on YouTube we have a video on [Ceating an OMF Connection](https://www.youtube.com/watch?v=52lAnkGC1IM).
 
-The format of the configuration for an ADH endpoint is shown below along with descriptions of each parameter. Replace all parameters with appropriate values.
+The format of the configuration for an Cds endpoint is shown below along with descriptions of each parameter. Replace all parameters with appropriate values.
 
 ```json
 {
@@ -162,6 +162,6 @@ The format of the configuration for a PI endpoint is shown below along with desc
 
 ---
 
-For the main OMF Complex Dynamic samples page [ReadMe](https://github.com/osisoft/OSI-Samples-OMF/blob/main/docs/COMPLEX_DYNAMIC.md)  
-For the main OMF samples page [ReadMe](https://github.com/osisoft/OSI-Samples-OMF)  
-For the main AVEVA samples page [ReadMe](https://github.com/osisoft/OSI-Samples)
+For the main OMF Complex Dynamic samples page [ReadMe](https://github.com/AVEVA/AVEVA-Samples-OMF/blob/main/docs/COMPLEX_DYNAMIC.md)  
+For the main OMF page [ReadMe](https://github.com/AVEVA/AVEVA-Samples-OMF)  
+For the main AVEVA samples page [ReadMe](https://github.com/AVEVA/AVEVA-Samples)
